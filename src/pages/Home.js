@@ -3,6 +3,7 @@ import Announcement from "../components/Announcement";
 import Categories from "../components/Categories";
 import HeroSlider from "../components/HeroSlider";
 import Navbar from "../components/Navbar";
+import Products from "../components/Products";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <Navbar />
       <HeroSlider />
       <Categories />
+      <Products />
     </div>
   );
 }

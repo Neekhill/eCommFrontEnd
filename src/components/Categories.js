@@ -6,10 +6,8 @@ import CategoryItem from "./CategoryItem";
 
 const Container = styled.div`
   display: flex;
-  padding: 20px 0;
-  margin-top: 20px;
-  margin-bottom: 80px;
-  padding-right: 35px;
+  flex-wrap: wrap;
+  padding: 20px;
 `;
 
 const Categories = () => {
