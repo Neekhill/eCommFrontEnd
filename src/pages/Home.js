@@ -1,14 +1,16 @@
-import React from 'react'
-import Announcement from '../components/Announcement'
-import Navbar from '../components/Navbar'
+import React from "react";
+import Announcement from "../components/Announcement";
+import HeroSlider from "../components/HeroSlider";
+import Navbar from "../components/Navbar";
 
 function Home() {
-    return (
-        <div>
-            <Announcement />
-            <Navbar />
-        </div>
-    )
+  return (
+    <div>
+      <Announcement />
+      <Navbar />
+      <HeroSlider />
+    </div>
+  );
 }
 
-export default Home
+export default Home;
