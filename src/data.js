@@ -78,3 +78,23 @@ export const productsData = [
     img: "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
   },
 ];
+
+export const productDataDetail = [
+  {
+    _id: "1",
+    title: "Unicorn Sweatshirt",
+    src: [
+      "https://i.ibb.co/wpd8cJb/product-Image1.jpg",
+      "https://i.ibb.co/JjSQ4xB/product-Image2.jpg",
+      "https://i.ibb.co/dt859xQ/Product-Image3.jpg",
+      "https://i.ibb.co/j3QL33G/product-Image4.jpg",
+    ],
+    description:
+      "The most comfy style for your little one! This adorable hooded sweatshirt is a must have for the season. Adorable prints detailing make it super stylish and the soft fabric makes it a comfortable choice.",
+    price: "2300",
+    delivery: "products are usually delivered in 3-7 days.",
+
+    colors: ["red", "black", "crimson", "teal"],
+    count: 1,
+  },
+];

@@ -20,12 +20,14 @@ const Info = styled.div`
 `;
 const Container = styled.div`
   flex: 1;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 5px;
   height: 350px;
-  min-width: 280px;
+  max-width: 270px;
+
   background-color: #f5fbfd;
   position: relative;
 
