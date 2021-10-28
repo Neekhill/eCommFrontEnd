@@ -1,6 +1,7 @@
 import React from "react";
 import Announcement from "../components/Announcement";
 import Categories from "../components/Categories";
+import Footer from "../components/Footer";
 import HeroSlider from "../components/HeroSlider";
 import Navbar from "../components/Navbar";
 import NewsLetter from "../components/NewsLetter";
@@ -15,6 +16,7 @@ function Home() {
       <Categories />
       <Products />
       <NewsLetter />
+      <Footer />
     </div>
   );
 }
