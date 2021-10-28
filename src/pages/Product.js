@@ -34,6 +34,7 @@ const ImageThumb = styled.img`
   width: 100px;
   height: 100px;
   margin: 4px 8px 8px 0;
+  cursor: pointer;
 `;
 
 const InfoContainer = styled.div`
