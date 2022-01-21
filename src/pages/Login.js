@@ -57,7 +57,7 @@ const Login = () => {
         <Form>
           <Input type="text" placeholder="Email" />
           <Input type="text" placeholder="Password" />
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
+          <Link>DON'T REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
           <Button>Create</Button>
         </Form>
