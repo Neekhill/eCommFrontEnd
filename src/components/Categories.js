@@ -1,4 +1,3 @@
-import { map } from "async";
 import React from "react";
 import styled from "styled-components";
 import { categories } from "../data";
