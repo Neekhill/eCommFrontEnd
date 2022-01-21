@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { sliderData } from "../data";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   height: 100vh;
@@ -11,6 +12,8 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   border: 0.09x solid black;
+  ${mobile({ display: "none" })}
+  ${tablet({ display: "none" })}
 `;
 const Arrow = styled.div`
   height: 50px;

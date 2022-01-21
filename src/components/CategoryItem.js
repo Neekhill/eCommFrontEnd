@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   flex: 1;
   margin: 5px;
   min-width: 350px;
   max-height: 500px;
+  ${mobile({ height: "40vh" })}
 
   position: relative;
 `;
