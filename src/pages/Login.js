@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import loginFormImg from "../assets/loginFormImg.jpg";
+import { mobile, tablet } from "../responsive";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -18,6 +19,8 @@ const Wrapper = styled.div`
   background: white;
   width: 25%;
   padding: 20px;
+  ${mobile({ width: "70%" })}
+  ${tablet({ width: "50%" })}
 `;
 const Title = styled.h1`
   font-size: 24px;
