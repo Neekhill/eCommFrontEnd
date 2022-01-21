@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import registerFormImg from "../assets/registerFormImg.jpg";
+import registerFormImg2 from "../assets/registerFormImg2.jpg";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -8,7 +8,7 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(${registerFormImg});
+    url(${registerFormImg2}) center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -52,12 +52,12 @@ const Register = () => {
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input type="text" placeholde="First Name" />
-          <Input type="text" placeholde="Last Name" />
-          <Input type="text" placeholde="Username" />
-          <Input type="text" placeholde="Email" />
-          <Input type="text" placeholde="Password" />
-          <Input type="text" placeholde="Confirm Password" />
+          <Input type="text" placeholder="First Name" />
+          <Input type="text" placeholder="Last Name" />
+          <Input type="text" placeholder="Username" />
+          <Input type="text" placeholder="Email" />
+          <Input type="text" placeholder="Password" />
+          <Input type="text" placeholder="Confirm Password" />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
