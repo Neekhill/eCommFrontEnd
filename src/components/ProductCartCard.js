@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Add, Remove } from "@mui/icons-material";
+import { mobile } from "../responsive";
 
 const Product = styled.div`
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -45,6 +47,7 @@ const ProductQuantityContainer = styled.div`
   padding: 10px;
   font-size: 20px;
   border: 1px solid lightgray;
+  ${mobile({ fontSize: "16px", padding: "1px", margin: "10px 0px" })}
 `;
 const ProductQuantity = styled.span`
   padding: 0 30px;
@@ -56,10 +59,12 @@ const PriceDetail = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
+  ${mobile({ justifyContent: "start" })}
 `;
 const ProductPrice = styled.span`
   font-size: 20px;
   font-weight: 500;
+  ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`

@@ -6,23 +6,29 @@ import NewsLetter from "../components/NewsLetter";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { Add, Remove } from "@mui/icons-material";
 import { productDataDetail } from "../data";
+import { large, mobile, tablet } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   display: flex;
   padding: 50px 100px;
+  ${mobile({ padding: "10px", flexDirection: "column" })}
+  ${tablet({ padding: "10px", flexDirection: "column" })}
+  ${large({ padding: "10px", flexDirection: "column" })}
 `;
 
 const ImageContainer = styled.div`
   flex: 1;
   padding: 0 50px;
+  ${mobile({ padding: "10px" })}
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 95vh;
   object-fit: cover;
+  ${mobile({ height: "50vh" })}
 `;
 
 const ImageThumbContainer = styled.div`
@@ -40,17 +46,21 @@ const ImageThumb = styled.img`
 const InfoContainer = styled.div`
   padding: 0 50px;
   flex: 1;
+
+  ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h2`
   font-size: 50px;
   font-weight: 300;
   line-height: 1.15;
+  ${mobile({ fontSize: "32px" })}
 `;
 const Price = styled.div`
   font-size: 40px;
   font-weight: 600;
   margin: 0 0 20px 0;
+  ${mobile({ fontSize: "24px" })}
 `;
 const Desc = styled.p`
   font-size: 18px;
@@ -74,7 +84,6 @@ const DeliveryMsg = styled.p`
 const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-content: ;
 `;
 
 const Filter = styled.div`

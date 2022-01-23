@@ -92,8 +92,15 @@ const AddToCartButton = styled.button`
   background-color: black;
   color: white;
   font-weight: 600;
+  font-size: 16px;
   border: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: teal;
+    color: white;
+    transition: all 0.3s ease;
+  }
 `;
 
 const ProductItem = ({ img, title, price }) => {
@@ -122,7 +129,7 @@ const ProductItem = ({ img, title, price }) => {
             {price}
           </InfoBottomPrice>
         </InfoBottom>
-        <AddToCartButton>Add to cart</AddToCartButton>
+        <AddToCartButton>View Details</AddToCartButton>
       </ProductWrapper>
     </ProductContainer>
   );
