@@ -24,7 +24,7 @@ export const categories = [
     id: 1,
     img: "https://images.pexels.com/photos/9771509/pexels-photo-9771509.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     title: "VIEW ALL",
-    category: "men women",
+    category: "",
   },
   {
     id: 2,
