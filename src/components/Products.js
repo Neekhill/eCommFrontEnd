@@ -21,13 +21,13 @@ const Products = ({ category, filters, sort }) => {
     // fetching products based on category or all products
     const getProducts = async () => {
       try {
-        const result = await axios.get(
+        const resonse = await axios.get(
           category
             ? `http://localhost:9000/products?category=${category}`
             : `http://localhost:9000/products`
         );
-        console.log(result);
-        setProducts(result.data.products);
+        console.log(resonse);
+        setProducts(resonse.data.products);
       } catch (error) {
         console.log(error);
       }

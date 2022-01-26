@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
@@ -7,6 +7,8 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import { Add, Remove } from "@mui/icons-material";
 import { productDataDetail } from "../data";
 import { large, mobile, tablet } from "../responsive";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -104,6 +106,7 @@ const FilterColor = styled.div`
   height: 20px;
   border-radius: 50%;
   margin: 0 5px;
+
   background-color: ${(props) => props.color};
   cursor: pointer;
 `;
@@ -156,24 +159,51 @@ const Button = styled.button`
 
 const Product = () => {
   const [productDetail /* setProductDetail */] = useState(productDataDetail[0]);
-
   const [slideIndex, setslideIndex] = useState(0);
+
+  const location = useLocation();
+  const productId = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [productImages, setProductImages] = useState([]);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9000/products/find/${productId}`
+        );
+        console.log(response.data.product);
+        setProduct(response.data.product);
+        setProductImages(response.data.product.img);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProduct();
+  }, [productId]);
 
   const handleSlideIndex = (index) => {
     setslideIndex(index);
   };
-
+  const handleQuantity = (type) => {
+    type === "add" && setQuantity(quantity + 1);
+    type === "remove" && quantity > 1 && setQuantity(quantity - 1);
+  };
   return (
     <Container>
       <Announcement />
       <Navbar />
       <Wrapper>
         <ImageContainer>
-          <Image src={productDetail.src[slideIndex]}></Image>
+          <Image src={productImages[slideIndex]}></Image>
           <ImageThumbContainer>
-            {productDetail.src.map((img, index) => (
+            {productImages.map((imgItem, index) => (
               <ImageThumb
-                src={img}
+                src={imgItem}
                 key={index}
                 onClick={() => handleSlideIndex(index)}
               />
@@ -181,9 +211,9 @@ const Product = () => {
           </ImageThumbContainer>
         </ImageContainer>
         <InfoContainer>
-          <Title>{productDetail.title}</Title>
-          <Price>Rs.{productDetail.price}</Price>
-          <Desc>{productDetail.desc}</Desc>
+          <Title>{product.title}</Title>
+          <Price>Rs.{product.price}</Price>
+          <Desc>{product.desc}</Desc>
           <Delivery>
             <DeliveryIcon>
               <LocalShippingOutlinedIcon />
@@ -196,28 +226,37 @@ const Product = () => {
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="red"></FilterColor>
-              <FilterColor color="pink"></FilterColor>
-              <FilterColor color="blue"></FilterColor>
-              <FilterColor color="yellow"></FilterColor>
+              {product.colors?.map((c) => (
+                <FilterColor
+                  color={c}
+                  key={c}
+                  onClick={(e) => setColor(c)}
+                ></FilterColor>
+              ))}
             </Filter>
 
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+                {product.sizes?.map((s) => (
+                  <FilterSizeOption
+                    key={s}
+                    onChange={(e) => setSize(e.target.value)}
+                  >
+                    {s}
+                  </FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove cursor="pointer" />
-              <Amount>1</Amount>
-              <Add cursor="pointer" />
+              <Remove
+                cursor="pointer"
+                onClick={() => handleQuantity("remove")}
+              />
+              <Amount>{quantity}</Amount>
+              <Add cursor="pointer" onClick={() => handleQuantity("add")} />
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>
