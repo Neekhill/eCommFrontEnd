@@ -7,8 +7,8 @@ import axios from "axios";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 30px;
-  margin: 30px 0;
+  //padding: 30px;
+  margin: 60px 0;
   justify-content: center;
 `;
 
@@ -26,7 +26,7 @@ const Products = ({ category, filters, sort }) => {
             ? `http://localhost:9000/products?category=${category}`
             : `http://localhost:9000/products`
         );
-        console.log(result.data.products);
+        console.log(result);
         setProducts(result.data.products);
       } catch (error) {
         console.log(error);
@@ -66,14 +66,13 @@ const Products = ({ category, filters, sort }) => {
   }, [sort]);
   return (
     <Container>
-      {filteredProducts.map((item) => (
-        <ProductItem
-          img={item.img[0]}
-          key={item._id}
-          title={item.title}
-          price={item.price}
-        />
-      ))}
+      {category // if category is there then showing filtered products
+        ? filteredProducts.map((item) => (
+            <ProductItem item={item} key={item.id} />
+          ))
+        : products
+            .slice(0, 8) // else showing only 8 products
+            .map((item) => <ProductItem item={item} key={item.id} />)}
     </Container>
   );
 };

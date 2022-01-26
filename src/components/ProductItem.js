@@ -1,7 +1,7 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ProductContainer = styled.div`
   flex: 1;
@@ -88,7 +88,7 @@ const InfoBottomPriceSpan = styled.span`
   font-weight: normal;
   font-size: 16px;
 `;
-const AddToCartButton = styled.button`
+const ViewDetailsBtn = styled.button`
   width: 100%;
   padding: 10px;
   background-color: black;
@@ -105,32 +105,32 @@ const AddToCartButton = styled.button`
   }
 `;
 
-const ProductItem = ({ img, title, price }) => {
+const ProductItem = ({ item }) => {
   return (
     <ProductContainer>
       <ProductWrapper>
         <Container>
-          <Image src={img}></Image>
+          <Image src={item.img[0]}></Image>
           <Info>
             <Icon>
               <ShoppingCartOutlinedIcon />
             </Icon>
-            <Icon>
-              <SearchOutlinedIcon />
-            </Icon>
+
             <Icon>
               <FavoriteBorderOutlinedIcon />
             </Icon>
           </Info>
         </Container>
         <InfoBottom>
-          <InfoBottomTitle>{title}</InfoBottomTitle>
+          <InfoBottomTitle>{item.title}</InfoBottomTitle>
           <InfoBottomPrice>
             <InfoBottomPriceSpan>Rs. </InfoBottomPriceSpan>
-            {price}
+            {item.price}
           </InfoBottomPrice>
         </InfoBottom>
-        <AddToCartButton>View Details</AddToCartButton>
+        <Link to={`/product/${item._id}`}>
+          <ViewDetailsBtn>View Details</ViewDetailsBtn>
+        </Link>
       </ProductWrapper>
     </ProductContainer>
   );
