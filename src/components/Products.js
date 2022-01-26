@@ -18,6 +18,7 @@ const Products = ({ category, filters, sort }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
+    // fetching products based on category or all products
     const getProducts = async () => {
       try {
         const result = await axios.get(
@@ -25,20 +26,32 @@ const Products = ({ category, filters, sort }) => {
             ? `http://localhost:9000/products?category=${category}`
             : `http://localhost:9000/products`
         );
-        console.log(result.data);
-        setProducts(result.data);
+        console.log(result.data.products);
+        setProducts(result.data.products);
       } catch (error) {
         console.log(error);
       }
     };
     getProducts();
   }, [category]);
+
+  useEffect(() => {
+    category &&
+      setFilteredProducts(
+        products.filter((item) =>
+          Object.entries(filters).every(([key, value]) =>
+            item[key].includes(value)
+          )
+        )
+      );
+  }, [products, category, filters]);
+
   return (
     <Container>
-      {productsData.map((item) => (
+      {filteredProducts.map((item) => (
         <ProductItem
           img={item.img[0]}
-          key={item.id}
+          key={item._id}
           title={item.title}
           price={item.price}
         />

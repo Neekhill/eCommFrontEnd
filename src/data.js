@@ -24,19 +24,19 @@ export const categories = [
     id: 1,
     img: "https://images.pexels.com/photos/9771509/pexels-photo-9771509.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     title: "VIEW ALL",
-    category: "",
+    category: "allproducts",
   },
   {
     id: 2,
     img: "https://images.pexels.com/photos/2845475/pexels-photo-2845475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "SHIRT STYLE!",
-    category: "shirts",
+    category: "shirt",
   },
   {
     id: 3,
     img: "https://images.pexels.com/photos/6578757/pexels-photo-6578757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "LOUNGEWEAR LOVE",
-    category: "unisex",
+    category: "tshirt",
   },
   {
     id: 4,
