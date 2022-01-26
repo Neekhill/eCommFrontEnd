@@ -10,12 +10,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Products = () => {
+const Products = ({ category, filters, sort }) => {
+  console.log(category, filters, sort);
   return (
     <Container>
       {productsData.map((item) => (
         <ProductItem
-          img={item.img}
+          img={item.img[0]}
           key={item.id}
           title={item.title}
           price={item.price}

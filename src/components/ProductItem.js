@@ -47,7 +47,9 @@ const Circle = styled.div`
   position: absolute;
 `;
 const Image = styled.img`
-  height: 75%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   z-index: 2;
 `;
 
@@ -108,7 +110,6 @@ const ProductItem = ({ img, title, price }) => {
     <ProductContainer>
       <ProductWrapper>
         <Container>
-          <Circle />
           <Image src={img}></Image>
           <Info>
             <Icon>

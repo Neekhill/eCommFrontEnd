@@ -33,6 +33,7 @@ const Image = styled.img`
 
 const ImageThumbContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 `;
 
@@ -41,6 +42,8 @@ const ImageThumb = styled.img`
   height: 100px;
   margin: 4px 8px 8px 0;
   cursor: pointer;
+  object-fit: cover;
+  ${mobile({ width: "60px", height: "60px", objectFit: "cover" })}
 `;
 
 const InfoContainer = styled.div`
@@ -152,7 +155,7 @@ const Button = styled.button`
 `;
 
 const Product = () => {
-  const [productDetail, setProductDetail] = useState(productDataDetail[0]);
+  const [productDetail /* setProductDetail */] = useState(productDataDetail[0]);
 
   const [slideIndex, setslideIndex] = useState(0);
 
@@ -180,12 +183,14 @@ const Product = () => {
         <InfoContainer>
           <Title>{productDetail.title}</Title>
           <Price>Rs.{productDetail.price}</Price>
-          <Desc>{productDetail.description}</Desc>
+          <Desc>{productDetail.desc}</Desc>
           <Delivery>
             <DeliveryIcon>
               <LocalShippingOutlinedIcon />
             </DeliveryIcon>
-            <DeliveryMsg>{productDetail.delivery}</DeliveryMsg>
+            <DeliveryMsg>
+              products are usually delivered in 3-7 days.
+            </DeliveryMsg>
           </Delivery>
 
           <FilterContainer>
