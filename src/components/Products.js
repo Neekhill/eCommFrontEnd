@@ -35,6 +35,7 @@ const Products = ({ category, filters, sort }) => {
     getProducts();
   }, [category]);
 
+  //filtering products
   useEffect(() => {
     category &&
       setFilteredProducts(
@@ -46,6 +47,23 @@ const Products = ({ category, filters, sort }) => {
       );
   }, [products, category, filters]);
 
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilteredProducts((prevFilteredProducts) => {
+        return [...prevFilteredProducts].sort(
+          (a, b) => a.createdAt - b.createdAt
+        );
+      });
+    } else if (sort === "asc") {
+      setFilteredProducts((prevFilteredProducts) => {
+        return [...prevFilteredProducts].sort((a, b) => a.price - b.price);
+      });
+    } else {
+      setFilteredProducts((prevFilteredProducts) => {
+        return [...prevFilteredProducts].sort((a, b) => b.price - a.price);
+      });
+    }
+  }, [sort]);
   return (
     <Container>
       {filteredProducts.map((item) => (
