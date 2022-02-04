@@ -167,8 +167,8 @@ const Product = () => {
   const productId = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [productImages, setProductImages] = useState([]);
-  const [color, setColor] = useState(null);
-  const [size, setSize] = useState(null);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   const [quantity, setQuantity] = useState(1);
 
@@ -245,14 +245,9 @@ const Product = () => {
 
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {product.sizes?.map((s) => (
-                  <FilterSizeOption
-                    key={s}
-                    onChange={(e) => setSize(e.target.value)}
-                  >
-                    {s}
-                  </FilterSizeOption>
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>

@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
@@ -90,6 +91,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
   return (
     <Conatiner>
       <Navbar />
@@ -106,18 +108,23 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <ProductCartCard />
-            <ProductCartCard />
-            <ProductCartCard />
-            <ProductCartCard />
-            <ProductCartCard />
-            <ProductCartCard />
+            {cart.products.map((product) => (
+              <ProductCartCard
+                img={product.img[0]}
+                title={product.title}
+                id={product._id}
+                color={product.color}
+                size={product.size}
+                quantity={product.quantity}
+                price={product.price}
+              />
+            ))}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>Rs.2300</SummaryItemPrice>
+              <SummaryItemPrice>Rs.{cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -129,7 +136,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Grand Total</SummaryItemText>
-              <SummaryItemPrice>Rs.2300</SummaryItemPrice>
+              <SummaryItemPrice>Rs.{cart.total}</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

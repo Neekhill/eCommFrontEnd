@@ -75,25 +75,28 @@ const Hr = styled.hr`
   margin: 0 2.5%;
 `;
 
-const ProductCartCard = () => {
+const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
   return (
     <>
       <Product>
         <ProductDetail>
-          <Image src="https://i.ibb.co/wpd8cJb/product-Image1.jpg"></Image>
+          <Image src={img}></Image>
           <Details>
             <ProductName>
-              <b>Product: </b>Unicorn Sweatshirt
+              <b>Product: </b>
+              {title}
             </ProductName>
             <ProductId>
-              <b>Product ID: </b>1234567
+              <b>Product ID: </b>
+              {id}
             </ProductId>
             <ProductColorName>
               <b>Color: </b>
-              <ProductColor color="pink"></ProductColor>
+              <ProductColor color={color}></ProductColor>
             </ProductColorName>
             <ProductSize>
-              <b>Size: </b>M
+              <b>Size: </b>
+              {size}
             </ProductSize>
           </Details>
         </ProductDetail>
@@ -101,13 +104,13 @@ const ProductCartCard = () => {
         <QuantityDetail>
           <ProductQuantityContainer>
             <Remove cursor="pointer" />
-            <ProductQuantity>1</ProductQuantity>
+            <ProductQuantity>{quantity}</ProductQuantity>
             <Add cursor="pointer" />
           </ProductQuantityContainer>
         </QuantityDetail>
 
         <PriceDetail>
-          <ProductPrice>Rs.2300</ProductPrice>
+          <ProductPrice>Rs.{price * quantity}</ProductPrice>
         </PriceDetail>
       </Product>
       <Hr />
