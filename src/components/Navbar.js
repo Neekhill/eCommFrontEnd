@@ -4,6 +4,8 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile, tablet } from "../responsive";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { NoEncryption } from "@mui/icons-material";
 
 const Container = styled.div`
   height: 60px;
@@ -84,16 +86,31 @@ function Navbar() {
           </Left>
 
           <Center>
-            <Logo>NIKHILL.</Logo>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <Logo>NIKHILL.</Logo>
+            </Link>
           </Center>
+
           <Right>
-            <MenuItem>REGISTER</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
-            <MenuItem>
-              <Badge badgeContent={cartQuantity} color="success">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </MenuItem>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuItem>REGISTER</MenuItem>
+            </Link>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuItem>SIGN IN</MenuItem>
+            </Link>
+            <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+              <MenuItem>
+                <Badge badgeContent={cartQuantity} color="success">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </MenuItem>
+            </Link>
           </Right>
         </Wrapper>
       </Container>
