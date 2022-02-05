@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import ProductCartCard from "../components/ProductCartCard";
-import { mobile, tablet } from "../responsive";
+import { large, mobile, tablet } from "../responsive";
 
 const Conatiner = styled.div``;
 
@@ -55,6 +55,7 @@ const Bottom = styled.div`
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
   ${tablet({ flexDirection: "column" })}
+  ${large({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -65,7 +66,7 @@ const Summary = styled.div`
   flex: 1;
   padding: 20px;
   border: 0.5px solid lightgray;
-  height: 46vh;
+  height: 50vh;
   border-radius: 10px;
 `;
 const SummaryTitle = styled.h2`
@@ -101,15 +102,16 @@ const Cart = () => {
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({cart.cartQuantity})</TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
           <TopButton>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
+            {cart.products.map((product, index) => (
               <ProductCartCard
+                key={index}
                 img={product.img[0]}
                 title={product.title}
                 id={product._id}

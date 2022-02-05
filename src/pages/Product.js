@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import NewsLetter from "../components/NewsLetter";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { Add, Remove } from "@mui/icons-material";
-import { productDataDetail } from "../data";
+
 import { large, mobile, tablet } from "../responsive";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -160,7 +160,6 @@ const Button = styled.button`
 `;
 
 const Product = () => {
-  const [productDetail /* setProductDetail */] = useState(productDataDetail[0]);
   const [slideIndex, setslideIndex] = useState(0);
 
   const location = useLocation();
