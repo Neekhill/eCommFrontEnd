@@ -4,7 +4,11 @@ import { Add, Remove } from "@mui/icons-material";
 import { mobile, tablet } from "../responsive";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useDispatch } from "react-redux";
-import { deleteProduct, incProductQuantity } from "../redux/cartSlice";
+import {
+  deleteProduct,
+  incProductQuantity,
+  decProductQuantity,
+} from "../redux/cartSlice";
 
 const ProductContainer = styled.div`
   display: flex;
@@ -92,11 +96,11 @@ const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
   const [isShown, setIsShown] = useState(false);
   const dispatch = useDispatch();
 
-  const handleRemoveItem = () => {
-    dispatch(deleteProduct({ id }));
-  };
   const handleIncQuantity = () => {
     dispatch(incProductQuantity({ id }));
+  };
+  const handleDecQuantity = () => {
+    dispatch(decProductQuantity({ id }));
   };
   return (
     <>
@@ -112,7 +116,7 @@ const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
               paddingTop: "20px",
               transition: "all 1s ease",
             }}
-            onClick={handleRemoveItem}
+            /* onClick={handleRemoveItem} */
           ></ClearIcon>
         )}
         <Product>
@@ -139,7 +143,7 @@ const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
           </ProductDetail>
           <QuantityDetail>
             <ProductQuantityContainer>
-              <Remove cursor="pointer" />
+              <Remove cursor="pointer" onClick={handleDecQuantity} />
               <ProductQuantity>{quantity}</ProductQuantity>
               <Add cursor="pointer" onClick={handleIncQuantity} />
             </ProductQuantityContainer>

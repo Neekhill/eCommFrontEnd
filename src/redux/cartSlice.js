@@ -20,9 +20,31 @@ const cartSlice = createSlice({
       state.products[index].quantity += 1;
       state.total += state.products[index].price;
     },
+    decProductQuantity: (state, action) => {
+      const index = state.products.findIndex(
+        (item) => item._id === action.payload.id
+      );
+      const itemPrice = state.products[index].price;
+
+      if (state.products[index].quantity > 1) {
+        state.products[index].quantity -= 1;
+        state.total -= state.products[index].price;
+      } else if (state.products[index].quantity === 1) {
+        const filteredProducts = state.products.filter(
+          (item) => item._id !== action.payload.id
+        );
+        state.cartQuantity -= 1;
+        state.total -= itemPrice;
+        state.products = filteredProducts;
+      }
+    },
   },
 });
 
-export const { addProduct, deleteProduct, incProductQuantity } =
-  cartSlice.actions;
+export const {
+  addProduct,
+  deleteProduct,
+  incProductQuantity,
+  decProductQuantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;
