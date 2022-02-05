@@ -13,6 +13,7 @@ import {
 const ProductContainer = styled.div`
   display: flex;
 `;
+const CrossIconContainer = styled.span``;
 const Product = styled.div`
   padding: 20px;
   display: flex;
@@ -102,6 +103,9 @@ const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
   const handleDecQuantity = () => {
     dispatch(decProductQuantity({ id }));
   };
+  const handleDeleteProduct = () => {
+    dispatch(deleteProduct({ id }));
+  };
   return (
     <>
       <ProductContainer
@@ -109,15 +113,16 @@ const ProductCartCard = ({ img, title, id, color, size, quantity, price }) => {
         onMouseLeave={() => setIsShown(false)}
       >
         {isShown && (
-          <ClearIcon
+          <CrossIconContainer
             style={{
               cursor: "pointer",
               paddingRight: "5px",
               paddingTop: "20px",
-              transition: "all 1s ease",
+              transition: "all 1s ease-in-out",
             }}
-            /* onClick={handleRemoveItem} */
-          ></ClearIcon>
+          >
+            <ClearIcon onClick={handleDeleteProduct} />
+          </CrossIconContainer>
         )}
         <Product>
           <ProductDetail>
