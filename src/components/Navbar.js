@@ -5,7 +5,6 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile, tablet } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { NoEncryption } from "@mui/icons-material";
 
 const Container = styled.div`
   height: 60px;
@@ -78,6 +77,7 @@ const MenuItem = styled.div`
 
 function Navbar() {
   const cartQuantity = useSelector((state) => state.cart.cartQuantity);
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <>
       <Container>
@@ -97,18 +97,29 @@ function Navbar() {
           </Center>
 
           <Right>
-            <Link
-              to="/register"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <MenuItem>REGISTER</MenuItem>
-            </Link>
-            <Link
-              to="/login"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <MenuItem>SIGN IN</MenuItem>
-            </Link>
+            {user ? (
+              <>
+                <MenuItem>{user.username.toUpperCase()}</MenuItem>
+                <MenuItem>LOGOUT</MenuItem>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link
+                  to="/register"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem>REGISTER</MenuItem>
+                </Link>
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem>SIGN IN</MenuItem>
+                </Link>
+              </>
+            )}
+
             <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
               <MenuItem>
                 <Badge badgeContent={cartQuantity} color="success">
