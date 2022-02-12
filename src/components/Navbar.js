@@ -99,7 +99,11 @@ function Navbar() {
           <Right>
             {user ? (
               <>
-                <MenuItem>{user.username.toUpperCase()}</MenuItem>
+                <MenuItem
+                  style={{ letterSpacing: "0.6px", fontWeight: "light" }}
+                >
+                  {user.username.toUpperCase()}
+                </MenuItem>
                 <MenuItem>LOGOUT</MenuItem>
               </>
             ) : (
