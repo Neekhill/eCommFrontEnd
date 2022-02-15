@@ -52,6 +52,11 @@ const cartSlice = createSlice({
       state.total = state.total - itemPrice * itemQuantity;
       state.products = filteredProducts;
     },
+    clearCart: (state, action) => {
+      state.products.length = 0;
+      state.cartQuantity = 0;
+      state.total = 0;
+    },
   },
 });
 
@@ -60,5 +65,6 @@ export const {
   incProductQuantity,
   decProductQuantity,
   deleteProduct,
+  clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
