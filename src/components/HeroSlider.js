@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { sliderData } from "../data";
-import { mobile, tablet } from "../responsive";
+import { large, mobile, tablet, tabletPlus, Xlarge } from "../responsive";
 
 const Container = styled.div`
   height: 100vh;
@@ -12,8 +12,11 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   border: 0.09x solid black;
-  ${mobile({ display: "none" })}
+  ${Xlarge({ height: "100vh" })}
+  ${large({ height: "95vh" })}
+  ${tabletPlus({ height: "70vh" })}
   ${tablet({ display: "none" })}
+  ${mobile({ display: "none" })}
 `;
 const Arrow = styled.div`
   height: 50px;
@@ -37,6 +40,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  align-items: center;
   transition: all 1.5s ease-in-out;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
@@ -46,12 +50,19 @@ const SlideContainer = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  ${Xlarge({ height: "93vh" })}
+  ${large({ height: "98vh" })}
+  ${tabletPlus({ height: "65vh" })}
 `;
 const ImgContainer = styled.div`
   flex: 1;
   height: 100%;
   display: flex;
+
   justify-content: flex-end;
+  ${Xlarge({ height: "90%" })}
+  ${large({ height: "95%" })}
+  ${tabletPlus({ height: "58%" })}
 `;
 const Img = styled.img`
   height: 88%;
@@ -59,9 +70,13 @@ const Img = styled.img`
 const InfoContainer = styled.div`
   flex: 1;
   padding-left: 100px;
+  ${Xlarge({ paddingLeft: "50px" })}
 `;
 const Title = styled.h2`
   font-size: 70px;
+  ${Xlarge({ fontSize: "60px" })}
+  ${large({ fontSize: "50px" })}
+  ${tabletPlus({ fontSize: "35px" })}
 `;
 const Desc = styled.p`
   margin: 35px 0 40px 0;
@@ -69,6 +84,8 @@ const Desc = styled.p`
   font-weight: 500;
   font-family: Georgia, "Times New Roman", Times, serif;
   letter-spacing: 3px;
+  ${large({ fontSize: "16px" })}
+  ${tabletPlus({ fontSize: "16px", margin: "25px 0 30px 0" })}
 `;
 const Button = styled.button`
   padding: 15px;
@@ -77,6 +94,7 @@ const Button = styled.button`
   border: none;
   color: white;
   background-color: black;
+  ${tabletPlus({ fontSize: "14px", padding: "10px 15px" })}
 `;
 
 function HeroSlider() {
