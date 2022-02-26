@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import styled from "styled-components";
 import registerFormImg2 from "../assets/registerFormImg2.jpg";
 import { largeMobile, mobile, tablet, tabletPlus } from "../responsive";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,7 +25,7 @@ const Wrapper = styled.div`
   background: white;
   width: 40%;
   padding: 20px;
-  ${tabletPlus({ width: "50%" })}
+  ${tabletPlus({ width: "60%" })}
   ${tablet({ width: "65%" })}
   ${largeMobile({ width: "70%" })}
 
@@ -35,10 +38,9 @@ const Title = styled.h1`
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
-  margin-left: 20px;
 `;
 const InputContainer = styled.span`
-  min-width: 45%;
+  min-width: 47%;
   margin: 20px 10px 0px 0px;
   ${mobile({ width: "100%" })}
   ${largeMobile({ width: "100%" })}
@@ -49,14 +51,15 @@ const Input = styled.input`
   padding: 10px;
 `;
 const Para = styled.p`
+  max-width: 90%;
   font-size: 12px;
   color: red;
   font-weight: 700;
+  word-wrap: break-word;
 `;
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
-  margin-right: 25px;
 `;
 const Button = styled.button`
   width: 40%;
@@ -86,8 +89,20 @@ const Register = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const submitForm = (data) => {
-    console.log(data);
+  const notify = () =>
+    toast.success("Account sent successfully!", { position: "top-center" });
+
+  const submitForm = async (data) => {
+    const { username, email, password } = data;
+    const response = await axios.post(`http://localhost:9000/auth/register`, {
+      username,
+      email,
+      password,
+    });
+    console.log(response);
+    if (response.status === 201) {
+      notify();
+    }
   };
   return (
     <Container>
@@ -95,6 +110,7 @@ const Register = () => {
         <Title>CREATE AN ACCOUNT</Title>
 
         <Form onSubmit={handleSubmit(submitForm)}>
+          <ToastContainer />
           <InputContainer>
             <Input
               type="text"
