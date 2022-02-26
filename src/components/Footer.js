@@ -81,7 +81,7 @@ const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>NIKHILL.</Logo>
+        <Logo>Shopsy</Logo>
         <Desc>
           lLorem Ipsum has been the industry's standard dummy text ever since
           the 1500s, when an unknown printer took a galley of type and scrambled

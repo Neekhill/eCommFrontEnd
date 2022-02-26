@@ -102,7 +102,7 @@ function Navbar() {
 
           <Center>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <Logo>NIKHILL.</Logo>
+              <Logo>Shopsy</Logo>
             </Link>
           </Center>
 
