@@ -11,6 +11,8 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { addProduct } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div``;
 
@@ -108,9 +110,11 @@ const FilterColor = styled.div`
   height: 20px;
   border-radius: 50%;
   margin: 0 5px;
-
   background-color: ${(props) => props.color};
   cursor: pointer;
+  &:hover {
+    border: 4px solid teal;
+  }
 `;
 
 const FilterSize = styled.select`
@@ -198,13 +202,28 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({ ...product, quantity, color, size }));
+    if (!(color === "" || size === "")) {
+      dispatch(addProduct({ ...product, quantity, color, size }));
+    } else {
+      console.log("color:", color);
+      console.log("size:", size);
+      !color &&
+        !size &&
+        toast.warn("Size and Color required!", { position: "top-center" });
+      size &&
+        !color &&
+        toast.warn("Color required!", { position: "top-center" });
+      color &&
+        !size &&
+        toast.warn("Size required!", { position: "top-center" });
+    }
   };
   return (
     <Container>
       <Announcement />
       <Navbar />
       <Wrapper>
+        <ToastContainer />
         <ImageContainer>
           <Image src={productImages[slideIndex]}></Image>
           <ImageThumbContainer>
@@ -245,7 +264,8 @@ const Product = () => {
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.sizes?.map((s) => (
+                <FilterSizeOption>Select Size</FilterSizeOption>
+                {product.sizes?.map((s, i) => (
                   <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
