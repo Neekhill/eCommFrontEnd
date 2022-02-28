@@ -1,9 +1,13 @@
+import axios from "axios";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import ProductCartCard from "../components/ProductCartCard";
 import { large, mobile, tablet } from "../responsive";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const Conatiner = styled.div``;
 
@@ -89,10 +93,69 @@ const Button = styled.button`
   color: white;
   font-weight: 600;
   border: none;
+  cursor: pointer;
 `;
 
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+
+  const notify = () =>
+    toast.error("User must login before checkout!", { position: "top-center" });
+
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+    const resFromBackend = await axios.post(
+      `http://localhost:9000/checkout/razorpay`,
+      {
+        amount: cart.total,
+      }
+    );
+    console.log(resFromBackend);
+
+    const options = {
+      key: "rzp_test_Qidn5zBgTBRiXC",
+      currency: resFromBackend.data.currency,
+      amount: resFromBackend.data.amount,
+      order_id: resFromBackend.data.id,
+      name: "Shopsy",
+      description: "Thank you!",
+      image: "",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+      },
+      prefill: {
+        name: user.currentUser.username,
+        email: user.currentUser.email,
+        phone_number: "9899999999",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+
   return (
     <Conatiner>
       <Navbar />
@@ -100,12 +163,17 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <ToastContainer />
+          <Link to="/products/allproducts">
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
             <TopText>Shopping Bag({cart.cartQuantity})</TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
-          <TopButton>CHECKOUT NOW</TopButton>
+          <TopButton onClick={(!user.currentUser && notify) || displayRazorpay}>
+            CHECKOUT NOW
+          </TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -140,7 +208,9 @@ const Cart = () => {
               <SummaryItemText>Grand Total</SummaryItemText>
               <SummaryItemPrice>Rs.{cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <Button onClick={(!user.currentUser && notify) || displayRazorpay}>
+              CHECKOUT NOW
+            </Button>
           </Summary>
         </Bottom>
       </Wrapper>
