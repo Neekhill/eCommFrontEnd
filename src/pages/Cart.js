@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
@@ -8,6 +8,7 @@ import { large, mobile, tablet } from "../responsive";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { clearCart } from "../redux/cartSlice";
 
 const Conatiner = styled.div``;
 
@@ -112,9 +113,34 @@ function loadScript(src) {
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const notify = () =>
     toast.error("User must login before checkout!", { position: "top-center" });
+
+  const handleCheckout = () => {
+    if (cart.products.length && user.currentUser) {
+      displayRazorpay();
+    } else {
+      !cart.products.length &&
+        !user.currentUser &&
+        toast.error("Cart is Empty and User must login before checkout!", {
+          position: "top-center",
+        });
+
+      cart.products.length &&
+        !user.currentUser &&
+        toast.error("User must login before checkout!", {
+          position: "top-center",
+        });
+
+      !cart.products.length &&
+        user.currentUser &&
+        toast.error("Cart is Empty!", {
+          position: "top-center",
+        });
+    }
+  };
 
   async function displayRazorpay() {
     const res = await loadScript(
@@ -154,16 +180,18 @@ const Cart = () => {
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+
+    dispatch(clearCart());
   }
 
   return (
     <Conatiner>
+      <ToastContainer />
       <Navbar />
       <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <ToastContainer />
           <Link to="/products/allproducts">
             <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
@@ -171,9 +199,7 @@ const Cart = () => {
             <TopText>Shopping Bag({cart.cartQuantity})</TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
-          <TopButton onClick={(!user.currentUser && notify) || displayRazorpay}>
-            CHECKOUT NOW
-          </TopButton>
+          <TopButton onClick={handleCheckout}>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -208,9 +234,7 @@ const Cart = () => {
               <SummaryItemText>Grand Total</SummaryItemText>
               <SummaryItemPrice>Rs.{cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button onClick={(!user.currentUser && notify) || displayRazorpay}>
-              CHECKOUT NOW
-            </Button>
+            <Button onClick={handleCheckout}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>

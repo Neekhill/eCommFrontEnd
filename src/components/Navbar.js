@@ -15,8 +15,8 @@ const Container = styled.div`
   top: 0;
   z-index: 999;
   background-color: white;
-  ${mobile({ height: "50px" })}
-  ${tablet({ height: "50px" })}
+  ${tablet({ height: "60px" })}
+  ${mobile({ height: "60px" })}
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -65,6 +65,7 @@ const Logo = styled.h1`
 const Right = styled.div`
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   ${mobile({ flex: 2, justifyContent: "center" })}
   ${tablet({ flex: 1, justifyContent: "center" })}
@@ -118,7 +119,6 @@ function Navbar() {
               </>
             ) : (
               <>
-                {" "}
                 <Link
                   to="/register"
                   style={{ textDecoration: "none", color: "black" }}
