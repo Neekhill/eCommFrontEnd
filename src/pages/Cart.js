@@ -7,7 +7,7 @@ import ProductCartCard from "../components/ProductCartCard";
 import { large, mobile, tablet } from "../responsive";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
 
 const Conatiner = styled.div``;
@@ -114,6 +114,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleCheckout = () => {
     if (cart.products.length && user.currentUser) {
@@ -166,9 +167,9 @@ const Cart = () => {
       description: "Thank you!",
       image: "",
       handler: function (response) {
-        alert(response.razorpay_payment_id);
+        /*  alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        alert(response.razorpay_signature); */
       },
       prefill: {
         name: user.currentUser.username,
@@ -178,7 +179,6 @@ const Cart = () => {
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-
     dispatch(clearCart());
   }
 

@@ -103,18 +103,23 @@ function Navbar() {
 
           <Center>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <Logo>FLYBUY.</Logo>
+              <Logo>FLYBUYY.</Logo>
             </Link>
           </Center>
 
           <Right>
             {user ? (
               <>
-                <MenuItem
-                  style={{ letterSpacing: "0.6px", fontWeight: "light" }}
+                <Link
+                  to="/userprofile"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
-                  {user.username.toUpperCase()}
-                </MenuItem>
+                  <MenuItem
+                    style={{ letterSpacing: "0.6px", fontWeight: "light" }}
+                  >
+                    {user.username.toUpperCase()}
+                  </MenuItem>
+                </Link>
                 <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
               </>
             ) : (
