@@ -63,7 +63,7 @@ export const categories = [
     category: "women",
   },
   {
-    id: 6,
+    id: 8,
     img: "https://images.pexels.com/photos/1851261/pexels-photo-1851261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     title: "CLASSY MENSWEAR",
     category: "men",

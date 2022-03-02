@@ -115,9 +115,6 @@ const Cart = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const notify = () =>
-    toast.error("User must login before checkout!", { position: "top-center" });
-
   const handleCheckout = () => {
     if (cart.products.length && user.currentUser) {
       displayRazorpay();
@@ -155,7 +152,8 @@ const Cart = () => {
       `http://localhost:9000/checkout/razorpay`,
       {
         amount: cart.total,
-      }
+      },
+      { headers: { token: `Bearer ${user.currentUser.token}` } }
     );
     console.log(resFromBackend);
 

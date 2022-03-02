@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { productsData } from "../data";
 import ProductItem from "./ProductItem";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -13,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Products = ({ category, filters, sort }) => {
-  console.log(category, filters, sort);
+  //console.log(category, filters, sort);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -26,7 +25,7 @@ const Products = ({ category, filters, sort }) => {
             ? `http://localhost:9000/products?category=${category}`
             : `http://localhost:9000/products`
         );
-        console.log(resonse);
+        //console.log(resonse);
         setProducts(resonse.data.products);
       } catch (error) {
         console.log(error);

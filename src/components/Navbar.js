@@ -103,7 +103,7 @@ function Navbar() {
 
           <Center>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <Logo>Shopsy</Logo>
+              <Logo>FLYBUY.</Logo>
             </Link>
           </Center>
 

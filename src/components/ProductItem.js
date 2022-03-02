@@ -39,13 +39,7 @@ const Container = styled.div`
     opacity: 1;
   }
 `;
-const Circle = styled.div`
-  height: 200px;
-  width: 200px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-`;
+
 const Image = styled.img`
   height: 100%;
   width: 100%;

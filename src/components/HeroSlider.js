@@ -118,8 +118,8 @@ function HeroSlider() {
           <ArrowLeftIcon />
         </Arrow>
         <Wrapper slideIndex={slideIndex}>
-          {sliderData.map((item) => (
-            <SlideContainer>
+          {sliderData.map((item, i) => (
+            <SlideContainer key={i}>
               <InfoContainer>
                 <Title>{item.title}</Title>
                 <Desc>{item.desc}</Desc>
