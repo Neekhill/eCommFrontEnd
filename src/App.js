@@ -12,7 +12,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import Success from "./pages/Success";
+/* import Success from "./pages/Success"; */
 import UserProfile from "./pages/UserProfile";
 
 function App() {
@@ -44,9 +44,9 @@ function App() {
           element={user ? <Navigate replace to="/" /> : <Register />}
         />
       </Routes>
-      <Routes>
+      {/*  <Routes>
         <Route path="/success" element={<Success />} />
-      </Routes>
+      </Routes> */}
       <Routes>
         <Route path="/userprofile" element={<UserProfile />} />
       </Routes>

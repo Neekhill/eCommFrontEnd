@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import NewsLetter from "../components/NewsLetter";
 import PersonalDetails from "../components/PersonalDetails";
 import { largeMobile } from "../responsive";
+
 const Container = styled.div`
   display: flex;
   margin: 20px auto;
@@ -17,7 +18,8 @@ const Left = styled.div`
   flex: 1;
 `;
 const Top = styled.div`
-  margin: 50px;
+  margin-top: 40px;
+  margin-left: 40px;
 `;
 const Greeting = styled.h1`
   font-size: 30px;
@@ -29,6 +31,7 @@ const GreetingDesc = styled.div`
 `;
 const Center = styled.div`
   width: 100%;
+  margin-bottom: 30px;
 `;
 const UserAccountCard = styled.div`
   display: flex;
@@ -62,12 +65,14 @@ const UserProfile = () => {
   return (
     <>
       <Navbar />
+      <Top>
+        <Greeting>Hello! {user.currentUser.firstname} 👋🏻</Greeting>
+        <GreetingDesc>
+          Need to change account? <b style={{ fontWeight: "700" }}>LOGOUT</b>
+        </GreetingDesc>
+      </Top>
       <Container>
         <Left>
-          <Top>
-            <Greeting>Hello! {user.currentUser.username} 👋🏻</Greeting>
-            <GreetingDesc>Need to change account? LOGOUT</GreetingDesc>
-          </Top>
           <Center>
             <UserAccountCard>
               <Title>Personal Details</Title>
@@ -93,6 +98,7 @@ const UserProfile = () => {
           <PersonalDetails />
         </Right>
       </Container>
+
       <NewsLetter />
       <Footer />
     </>

@@ -7,6 +7,7 @@ import { largeMobile, mobile, tablet, tabletPlus } from "../responsive";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -80,6 +81,7 @@ const validationSchema = Yup.object({
   confirmpassword: Yup.string().oneOf([Yup.ref("password")]),
 });
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -93,8 +95,10 @@ const Register = () => {
     toast.success("Account sent successfully!", { position: "top-center" });
 
   const submitForm = async (data) => {
-    const { username, email, password } = data;
+    const { firstname, lastname, username, email, password } = data;
     const response = await axios.post(`http://localhost:9000/auth/register`, {
+      firstname,
+      lastname,
       username,
       email,
       password,
@@ -102,6 +106,11 @@ const Register = () => {
     console.log(response);
     if (response.status === 201) {
       notify();
+
+      setTimeout(() => navigate("/login"), 2000);
+    }
+    if (response.status === 500 || response.status === 501) {
+      toast.error("Server Error!", { position: "top-center" });
     }
   };
   return (

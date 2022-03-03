@@ -9,11 +9,13 @@ import {
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import CompleteRegistrationForm from "./CompleteRegistrationForm";
+import CustomizedDialogs from "./ModalRegistration";
 
 const UserMainContainer = styled.div``;
 
 const UserContainer = styled.div`
-  margin: 50px;
+  margin: 0 20px;
   display: flex;
 `;
 const UserShow = styled.div`
@@ -60,13 +62,6 @@ const UserShowBottomInfoTitle = styled.span`
   margin-left: 10px;
   cursor: pointer;
 `;
-const Button = styled.div`
-  background-color: black;
-  color: white;
-  padding: 15px 10px;
-  width: 150px;
-  text-align: center;
-`;
 
 const PersonalDetails = () => {
   const user = useSelector((state) => state.user);
@@ -77,7 +72,7 @@ const PersonalDetails = () => {
           <UserShowTop>
             <UserShowTopTile>
               <UserShowTopUsername>
-                {user.currentUser.username.toUpperCase()}
+                {`${user.currentUser.firstname} ${user.currentUser.lastname}`}
               </UserShowTopUsername>
             </UserShowTopTile>
           </UserShowTop>
@@ -89,7 +84,9 @@ const PersonalDetails = () => {
               <UserShowBottomInfoIcon>
                 <PermIdentity />
               </UserShowBottomInfoIcon>
-              <UserShowBottomInfoTitle>neek_hill</UserShowBottomInfoTitle>
+              <UserShowBottomInfoTitle>
+                {user.currentUser.username}
+              </UserShowBottomInfoTitle>
             </UserShowBottomInfo>
 
             <UserShowBottomInfo>
@@ -109,8 +106,8 @@ const PersonalDetails = () => {
                 <PhoneAndroid />
               </UserShowBottomInfoIcon>
               <UserShowBottomInfoTitle>
-                {user.currentUser.phoneNumber
-                  ? user.currentUser.phoneNumber
+                {user.currentUser.phone
+                  ? user.currentUser.phone
                   : " Add phone number"}
               </UserShowBottomInfoTitle>
             </UserShowBottomInfo>
@@ -135,7 +132,10 @@ const PersonalDetails = () => {
               </UserShowBottomInfoTitle>
             </UserShowBottomInfo>
           </UserShowBottom>
-          <Button>Update</Button>
+
+          <CustomizedDialogs>
+            <CompleteRegistrationForm />
+          </CustomizedDialogs>
         </UserShow>
       </UserContainer>
     </UserMainContainer>
