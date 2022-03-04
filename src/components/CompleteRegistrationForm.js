@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styled from "styled-components";
-import registerFormImg2 from "../assets/registerFormImg2.jpg";
-import { largeMobile, mobile, tablet, tabletPlus } from "../responsive";
+
+import { largeMobile, mobile } from "../responsive";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,11 +14,6 @@ const Wrapper = styled.div`
   background: white;
 
   padding: 20px;
-  /*  ${tabletPlus({ width: "60%" })}
-  ${tablet({ width: "65%" })}
-  ${largeMobile({ width: "70%" })}
-
-  ${mobile({ width: "70%" })} */
 `;
 const Title = styled.h1`
   font-size: 24px;
@@ -114,7 +109,7 @@ const CompleteRegistrationForm = () => {
       { headers: { token: `Bearer ${user.currentUser.token}` } }
     );
     console.log(response);
-    if (response === 200) {
+    if (response.status === 200) {
       notify();
       dispatch(
         updateUser({

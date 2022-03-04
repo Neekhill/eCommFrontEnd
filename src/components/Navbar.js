@@ -117,7 +117,7 @@ function Navbar() {
                   <MenuItem
                     style={{ letterSpacing: "0.6px", fontWeight: "light" }}
                   >
-                    {user.username.toUpperCase()}
+                    {user.firstname.toUpperCase()}
                   </MenuItem>
                 </Link>
                 <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>

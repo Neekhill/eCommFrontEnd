@@ -81,7 +81,7 @@ export default function CustomizedDialogs({ children }) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Personal Details
+          Shipping Details
         </BootstrapDialogTitle>
         <DialogContent dividers>{children}</DialogContent>
       </BootstrapDialog>

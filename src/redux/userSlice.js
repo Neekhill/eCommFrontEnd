@@ -32,9 +32,19 @@ const userSlice = createSlice({
       state.currentUser.phone = action.payload.phone;
       state.currentUser.birthday = action.payload.birthday;
     },
+    updateUserAddress: (state, action) => {
+      state.currentUser.shippingaddress = action.payload.shippingaddress;
+      state.currentUser.billingaddress = action.payload.billingaddress;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, updateUser } =
-  userSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  updateUser,
+  updateUserAddress,
+} = userSlice.actions;
 export default userSlice.reducer;
