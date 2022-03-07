@@ -83,7 +83,9 @@ export default function CustomizedDialogs({ children }) {
         >
           Shipping Details
         </BootstrapDialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
+        <DialogContent dividers handleClose={handleClose}>
+          {children}
+        </DialogContent>
       </BootstrapDialog>
     </div>
   );

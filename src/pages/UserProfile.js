@@ -12,12 +12,14 @@ import MyOrders from "../components/MyOrders";
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   margin: 20px auto;
   ${largeMobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
   flex: 1;
+  margin-bottom: 30px;
 `;
 const Top = styled.div`
   margin-top: 40px;
@@ -36,13 +38,9 @@ const GreetingDesc = styled.div`
   color: teal;
 `;
 const Center = styled.div`
-  width: 100%;
-  margin-bottom: 30px;
-  ${largeMobile({
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  })}
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 const UserAccountCard = styled.div`
   display: flex;
@@ -52,11 +50,10 @@ const UserAccountCard = styled.div`
   margin-left: 20px;
   margin-top: 20px;
   width: 280px;
-  height: 80px;
+  height: 60px;
   cursor: pointer;
   border: 1px solid #f0f0f5;
-  -webkit-box-shadow: 0 3px 6px 0 rgb(45 45 51 / 8%);
-  box-shadow: 0 3px 6px 0 rgb(45 45 51 / 8%);
+
   &:hover {
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);

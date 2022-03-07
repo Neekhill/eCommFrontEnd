@@ -163,22 +163,24 @@ const Cart = () => {
       currency: resFromBackend.data.currency,
       amount: resFromBackend.data.amount,
       order_id: resFromBackend.data.id,
-      name: "Shopsy",
+      name: "FLYBUYY.",
       description: "Thank you!",
       image: "",
       handler: function (response) {
-        /*  alert(response.razorpay_payment_id);
+        alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
-        alert(response.razorpay_signature); */
+        alert(response.razorpay_signature);
+        navigate("/success", { state: { response, cart } });
       },
       prefill: {
-        name: user.currentUser.username,
+        name: user.currentUser.firstname,
         email: user.currentUser.email,
-        phone_number: "9899999999",
+        phone_number: user.currentUser.phone,
       },
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+
     dispatch(clearCart());
   }
 
