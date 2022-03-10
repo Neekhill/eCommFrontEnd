@@ -27,8 +27,11 @@ const AllOrders = styled.div`
   margin: 20px 0;
 `;
 const OrderContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
+  //display: flex;
+  //justify-content: space-between;
+  display: grid;
+  grid-template-columns: 35% 35% 10% 10% 10%;
+
   border: 1px solid #f0f0f5;
   &:hover {
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -36,23 +39,27 @@ const OrderContainer = styled.div`
     position: relative;
     transition: all 0.5s ease;
   }
-  ${largeMobile({ padding: "10px", flexDirection: "column" })}
+  ${largeMobile({ padding: "10px", display: "flex", flexDirection: "column" })}
 `;
 const OrderIdContainer = styled.div`
   margin: 10px;
+  width: "100px";
   text-align: left;
   ${mobile({ margin: "2px" })}
 `;
 const UserIdContainer = styled.div`
   margin: 10px;
+  width: "50px";
   ${mobile({ margin: "2px" })}
 `;
 const AmountContainer = styled.div`
   margin: 10px;
+  width: "50px";
   ${mobile({ margin: "2px" })}
 `;
 const StatusContainer = styled.div`
   margin: 10px;
+  width: "50px";
   ${mobile({ margin: "2px" })}
 `;
 const IconContainer = styled.div`
@@ -60,6 +67,7 @@ const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 15px;
+  width: "50px";
   ${mobile({ margin: "2px", padding: "5px" })}
 `;
 const Heading = styled.div`
@@ -91,7 +99,7 @@ const MyOrders = () => {
       }
     };
     getOrders();
-  }, []);
+  }, [user.currentUser._id, user.currentUser.token]);
 
   return (
     <MainContaienr>
@@ -108,14 +116,15 @@ const MyOrders = () => {
                 <Heading>User ID</Heading>
                 <Data>{item.userId}</Data>
               </UserIdContainer>
-              <AmountContainer>
-                <Heading>Amount</Heading>
-                <Data>Rs.{item.amount}</Data>
-              </AmountContainer>
               <StatusContainer>
                 <Heading>Status</Heading>
                 <Data>{item.status}</Data>
               </StatusContainer>
+
+              <AmountContainer>
+                <Heading>Amount</Heading>
+                <Data>Rs.{item.amount}</Data>
+              </AmountContainer>
               <IconContainer>
                 <KeyboardArrowDownIcon />
               </IconContainer>
