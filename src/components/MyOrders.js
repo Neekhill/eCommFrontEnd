@@ -23,9 +23,7 @@ const MyOrdersTitle = styled.div`
   margin-bottom: 20px;
 `;
 
-const AllOrders = styled.div`
-  margin: 20px 0;
-`;
+const AllOrders = styled.div``;
 
 const MyOrders = () => {
   const user = useSelector((state) => state.user);

@@ -22,8 +22,8 @@ const OrderMainContainer = styled.div`
   }
   ${largeMobile({
     padding: "10px",
-    gridTemplateColumns: "1fr 1fr",
-    gridTemplaterows: "1fr 1fr 1fr",
+    gridTemplateColumns: ".5fr .5fr",
+    gridTemplaterows: "1fr 1fr",
   })}
 `;
 const OrderIdContainer = styled.div``;
@@ -31,14 +31,7 @@ const UserIdContainer = styled.div``;
 const AmountContainer = styled.div``;
 const StatusContainer = styled.div``;
 const IconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  width: "50px";
   ${mobile({
-    margin: "2px",
-    padding: "5px",
     gridColumn: "span 2",
   })}
 `;
@@ -50,7 +43,7 @@ const Data = styled.div`
   margin-top: 5px;
   line-height: 1.43;
   font-size: 14px;
-  ${mobile({ wordWrap: "wrap" })}
+  ${largeMobile({ wordWrap: "wrap", fontSize: "12px" })}
 `;
 
 const OrderDetailsContainer = styled.div``;
@@ -65,7 +58,7 @@ const OrderDetails = styled.div`
 
   ${largeMobile({
     padding: "10px",
-    gridTemplateColumns: "1fr 1fr 1fr",
+    gridTemplateColumns: "1fr 1fr",
     gridTemplaterows: "100% 100% 100%",
   })}
 `;
@@ -75,12 +68,7 @@ const Image = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `;
-const SmallContainer = styled.div`
-  margin: 10px;
-  width: "100px";
-  text-align: left;
-  ${mobile({ margin: "2px" })}
-`;
+const SmallContainer = styled.div``;
 
 const OrderContainer = ({ item }) => {
   const [displayOrderDetails, setDisplayOrderDetails] = useState(false);
