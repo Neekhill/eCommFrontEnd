@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { largeMobile, mobile } from "../responsive";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import axios from "axios";
 import { useSelector } from "react-redux";
+import OrderContainer from "./OrderContainer";
 
 const MainContaienr = styled.div`
   margin: 0 20px;
@@ -25,61 +25,6 @@ const MyOrdersTitle = styled.div`
 
 const AllOrders = styled.div`
   margin: 20px 0;
-`;
-const OrderContainer = styled.div`
-  //display: flex;
-  //justify-content: space-between;
-  display: grid;
-  grid-template-columns: 35% 35% 10% 10% 10%;
-
-  border: 1px solid #f0f0f5;
-  &:hover {
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
-    position: relative;
-    transition: all 0.5s ease;
-  }
-  ${largeMobile({ padding: "10px", display: "flex", flexDirection: "column" })}
-`;
-const OrderIdContainer = styled.div`
-  margin: 10px;
-  width: "100px";
-  text-align: left;
-  ${mobile({ margin: "2px" })}
-`;
-const UserIdContainer = styled.div`
-  margin: 10px;
-  width: "50px";
-  ${mobile({ margin: "2px" })}
-`;
-const AmountContainer = styled.div`
-  margin: 10px;
-  width: "50px";
-  ${mobile({ margin: "2px" })}
-`;
-const StatusContainer = styled.div`
-  margin: 10px;
-  width: "50px";
-  ${mobile({ margin: "2px" })}
-`;
-const IconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  width: "50px";
-  ${mobile({ margin: "2px", padding: "5px" })}
-`;
-const Heading = styled.div`
-  font-weight: 700;
-`;
-const Data = styled.div`
-  color: #676768;
-  margin-top: 5px;
-
-  line-height: 1.43;
-  font-size: 14px;
-  ${mobile({ wordWrap: "wrap" })}
 `;
 
 const MyOrders = () => {
@@ -106,29 +51,8 @@ const MyOrders = () => {
       <Container>
         <MyOrdersTitle>Order Details</MyOrdersTitle>
         <AllOrders>
-          {allOrders.map((item) => (
-            <OrderContainer>
-              <OrderIdContainer>
-                <Heading>Order ID</Heading>
-                <Data>{item._id}</Data>
-              </OrderIdContainer>
-              <UserIdContainer>
-                <Heading>User ID</Heading>
-                <Data>{item.userId}</Data>
-              </UserIdContainer>
-              <StatusContainer>
-                <Heading>Status</Heading>
-                <Data>{item.status}</Data>
-              </StatusContainer>
-
-              <AmountContainer>
-                <Heading>Amount</Heading>
-                <Data>Rs.{item.amount}</Data>
-              </AmountContainer>
-              <IconContainer>
-                <KeyboardArrowDownIcon />
-              </IconContainer>
-            </OrderContainer>
+          {allOrders.map((item, i) => (
+            <OrderContainer item={item} key={i} />
           ))}
         </AllOrders>
       </Container>

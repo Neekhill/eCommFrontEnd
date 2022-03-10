@@ -31,6 +31,7 @@ const Success = () => {
               size: item.size,
               color: item.color,
               img: item.img[0],
+              price: item.price,
             })),
             amount: cart.total,
             address: user.currentUser.billingaddress,
