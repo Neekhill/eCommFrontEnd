@@ -164,7 +164,7 @@ const Cart = () => {
       return;
     }
     const resFromBackend = await axios.post(
-      `http://localhost:9000/checkout/razorpay`,
+      `https://nikhil-ecomm.herokuapp.com/checkout/razorpay`,
       {
         amount: cart.total,
       },

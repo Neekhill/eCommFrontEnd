@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import NewsLetter from "../components/NewsLetter";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { Add, Remove } from "@mui/icons-material";
@@ -286,6 +287,7 @@ const Product = () => {
       </Wrapper>
 
       <NewsLetter />
+      <Footer />
     </Container>
   );
 };

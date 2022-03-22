@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { mobile, tablet } from "../responsive";
+import { largeMobile, mobile, tablet } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -20,14 +20,17 @@ const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  ${mobile({ padding: "10px 0px" })}
-  ${tablet({ padding: "10px 0px" })}
+  justify-content: space-around;
+  ${tablet({ padding: "10px 5px" })}//${mobile({ padding: "10px 2px" })}
 `;
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  ${largeMobile({
+    marginLeft: "12px",
+    width: "50px",
+  })}
 `;
 const Lang = styled.span`
   font-size: 14px;
@@ -41,9 +44,16 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
-  ${mobile({ margin: "0px 10px" })}
   ${tablet({ margin: "0px 10px" })}
+  ${largeMobile({ display: "none" })}
 `;
+const MobileSearch = styled.span`
+  display: "none";
+  ${largeMobile({
+    display: "block",
+  })}
+`;
+
 const Input = styled.input`
   border: none;
   ${mobile({ width: "50px" })}
@@ -56,7 +66,7 @@ const Center = styled.div`
 `;
 const Logo = styled.h1`
   font-weight: bold;
-  ${mobile({ fontSize: "24px" })}
+  ${largeMobile({ fontSize: "24px" })}
   ${tablet({ fontSize: "32px" })}
 `;
 
@@ -65,8 +75,9 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({ flex: 2, justifyContent: "center" })}
   ${tablet({ flex: 1, justifyContent: "center" })}
+  ${largeMobile({ flex: 8, justifyContent: "flex-end", marginRight: "16px" })}
+  ${mobile({ flex: 5, justifyContent: "flex-end" })}
 `;
 const MenuItem = styled.div`
   font-size: 14px;
@@ -90,6 +101,10 @@ function Navbar() {
               <Input placeholder="Search" />
               <SearchIcon style={{ color: "gray", fontSize: 16 }} />
             </SearchContainer>
+
+            <MobileSearch>
+              <SearchIcon style={{ color: "gray", fontSize: 24 }} />
+            </MobileSearch>
           </Left>
 
           <Center>

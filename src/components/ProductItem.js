@@ -106,12 +106,18 @@ const ProductItem = ({ item }) => {
         <Container>
           <Image src={item.img[0]}></Image>
           <Info>
-            <Link to={`/product/${item._id}`}>
+            <Link
+              to={`/product/${item._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <Icon>
                 <ShoppingCartOutlinedIcon />
               </Icon>
             </Link>
-            <Link to={`/product/${item._id}`}>
+            <Link
+              to={`/product/${item._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <Icon>
                 <FavoriteBorderOutlinedIcon />
               </Icon>
