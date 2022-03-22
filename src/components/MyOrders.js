@@ -24,6 +24,7 @@ const MyOrdersTitle = styled.div`
 `;
 
 const AllOrders = styled.div``;
+const NoOrder = styled.div``;
 
 const MyOrders = () => {
   const user = useSelector((state) => state.user);
@@ -32,7 +33,7 @@ const MyOrders = () => {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:9000/orders/find/${user.currentUser._id}`,
+          `https://nikhil-ecomm.herokuapp.com/orders/find/${user.currentUser._id}`,
           { headers: { token: `Bearer ${user.currentUser.token}` } }
         );
         console.log(res.data.orders);
@@ -49,9 +50,11 @@ const MyOrders = () => {
       <Container>
         <MyOrdersTitle>Order Details</MyOrdersTitle>
         <AllOrders>
-          {allOrders.map((item, i) => (
-            <OrderContainer item={item} key={i} />
-          ))}
+          {allOrders ? (
+            allOrders.map((item, i) => <OrderContainer item={item} key={i} />)
+          ) : (
+            <NoOrder>No Orders Placed</NoOrder>
+          )}
         </AllOrders>
       </Container>
     </MainContaienr>

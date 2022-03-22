@@ -4,6 +4,7 @@ import loginFormImg from "../assets/loginFormImg.jpg";
 import { login } from "../redux/apiCalls";
 import { mobile, tablet } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "../components/Navbar";
 
 const Container = styled.div`
   width: 100vw;
@@ -74,29 +75,32 @@ const Login = () => {
     login(dispatch, { email, password });
   };
   return (
-    <Container>
-      <Wrapper>
-        <Title>SIGN IN</Title>
-        <Form>
-          <Input
-            type="text"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {error && <Error>Invalid email/password</Error>}
-          <Link>DON'T REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
-          <Button onClick={handleClick} disabled={isFecthing}>
-            Login
-          </Button>
-        </Form>
-      </Wrapper>
-    </Container>
+    <>
+      <Navbar />
+      <Container>
+        <Wrapper>
+          <Title>SIGN IN</Title>
+          <Form>
+            <Input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {error && <Error>Invalid email/password</Error>}
+            <Link>DON'T REMEMBER THE PASSWORD?</Link>
+            <Link>CREATE A NEW ACCOUNT</Link>
+            <Button onClick={handleClick} disabled={isFecthing}>
+              Login
+            </Button>
+          </Form>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

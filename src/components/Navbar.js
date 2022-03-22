@@ -120,7 +120,6 @@ function Navbar() {
                     {user.firstname.toUpperCase()}
                   </MenuItem>
                 </Link>
-                <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
               </>
             ) : (
               <>

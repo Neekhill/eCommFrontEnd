@@ -22,8 +22,8 @@ const Products = ({ category, filters, sort }) => {
       try {
         const resonse = await axios.get(
           category
-            ? `http://localhost:9000/products?category=${category}`
-            : `http://localhost:9000/products`
+            ? `https://nikhil-ecomm.herokuapp.com/products?category=${category}`
+            : `https://nikhil-ecomm.herokuapp.com/products`
         );
         //console.log(resonse);
         setProducts(resonse.data.products);

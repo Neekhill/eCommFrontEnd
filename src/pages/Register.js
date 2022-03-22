@@ -8,6 +8,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Container = styled.div`
   width: 100vw;
@@ -96,98 +97,110 @@ const Register = () => {
 
   const submitForm = async (data) => {
     const { firstname, lastname, username, email, password } = data;
-    const response = await axios.post(`http://localhost:9000/auth/register`, {
-      firstname,
-      lastname,
-      username,
-      email,
-      password,
-    });
-    console.log(response);
-    if (response.status === 201) {
-      notify();
+    try {
+      const response = await axios.post(
+        `https://nikhil-ecomm.herokuapp.com/auth/register`,
+        {
+          firstname,
+          lastname,
+          username,
+          email,
+          password,
+        }
+      );
+      console.log(response);
+      if (response.status === 201) {
+        notify();
 
-      setTimeout(() => navigate("/login"), 2000);
-    }
-    if (response.status === 500 || response.status === 501) {
-      toast.error("Server Error!", { position: "top-center" });
+        setTimeout(() => navigate("/login"), 2000);
+      }
+    } catch (error) {
+      if (error.response.status === 500) {
+        toast.error("Server Error!", { position: "top-center" });
+      }
+      if (error.response.status === 501) {
+        toast.error("User already registered!", { position: "top-center" });
+      }
     }
   };
   return (
-    <Container>
-      <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
+    <>
+      <Navbar />
+      <Container>
+        <Wrapper>
+          <Title>CREATE AN ACCOUNT</Title>
 
-        <Form onSubmit={handleSubmit(submitForm)}>
-          <ToastContainer />
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="First Name"
-              name="firstname"
-              {...register("firstname")}
-            />
-            <Para>{errors.firstname?.message}</Para>
-          </InputContainer>
+          <Form onSubmit={handleSubmit(submitForm)}>
+            <ToastContainer />
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="First Name"
+                name="firstname"
+                {...register("firstname")}
+              />
+              <Para>{errors.firstname?.message}</Para>
+            </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Last Name"
-              name="lastname"
-              {...register("lastname")}
-            />
-            <Para>{errors.lastname?.message}</Para>
-          </InputContainer>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Last Name"
+                name="lastname"
+                {...register("lastname")}
+              />
+              <Para>{errors.lastname?.message}</Para>
+            </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Username"
-              name="username"
-              {...register("username")}
-            />
-            <Para>{errors.username?.message}</Para>
-          </InputContainer>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Username"
+                name="username"
+                {...register("username")}
+              />
+              <Para>{errors.username?.message}</Para>
+            </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Email"
-              name="email"
-              {...register("email")}
-            />
-            <Para>{errors.email?.message}</Para>
-          </InputContainer>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Email"
+                name="email"
+                {...register("email")}
+              />
+              <Para>{errors.email?.message}</Para>
+            </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Password"
-              name="password"
-              {...register("password")}
-            />
-            <Para>{errors.password?.message}</Para>
-          </InputContainer>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Password"
+                name="password"
+                {...register("password")}
+              />
+              <Para>{errors.password?.message}</Para>
+            </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Confirm Password"
-              name="confirmpassword"
-              {...register("confirmpassword")}
-            />
-            <Para>{errors.confirmpassword && "password should match"}</Para>
-          </InputContainer>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Confirm Password"
+                name="confirmpassword"
+                {...register("confirmpassword")}
+              />
+              <Para>{errors.confirmpassword && "password should match"}</Para>
+            </InputContainer>
 
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button type="submit">Create</Button>
-        </Form>
-      </Wrapper>
-    </Container>
+            <Agreement>
+              By creating an account, I consent to the processing of my personal
+              data in accordance with the <b>PRIVACY POLICY</b>
+            </Agreement>
+            <Button type="submit">Create</Button>
+          </Form>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

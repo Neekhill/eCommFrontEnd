@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -9,6 +9,10 @@ import PersonalDetails from "../components/PersonalDetails";
 import { largeMobile, tablet } from "../responsive";
 import ShippingDetails from "../components/ShippingDetails";
 import MyOrders from "../components/MyOrders";
+import { logout } from "../redux/userSlice";
+import { clearCart } from "../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { Padding } from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
@@ -82,13 +86,32 @@ const Right = styled.div`
 const UserProfile = () => {
   const user = useSelector((state) => state.user);
   const [show, setShow] = useState("personalDetails");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearCart());
+    navigate("/");
+  };
   return (
     <>
       <Navbar />
       <Top>
         <Greeting>Hello! {user.currentUser.firstname} 👋🏻</Greeting>
         <GreetingDesc>
-          Need to change account? <b style={{ fontWeight: "700" }}>LOGOUT</b>
+          Need to change account?{" "}
+          <b
+            style={{
+              fontWeight: "700",
+              padding: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+            onClick={handleLogout}
+          >
+            LOGOUT
+          </b>
         </GreetingDesc>
       </Top>
       <Container>

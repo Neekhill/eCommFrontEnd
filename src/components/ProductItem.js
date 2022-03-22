@@ -106,13 +106,16 @@ const ProductItem = ({ item }) => {
         <Container>
           <Image src={item.img[0]}></Image>
           <Info>
-            <Icon>
-              <ShoppingCartOutlinedIcon />
-            </Icon>
-
-            <Icon>
-              <FavoriteBorderOutlinedIcon />
-            </Icon>
+            <Link to={`/product/${item._id}`}>
+              <Icon>
+                <ShoppingCartOutlinedIcon />
+              </Icon>
+            </Link>
+            <Link to={`/product/${item._id}`}>
+              <Icon>
+                <FavoriteBorderOutlinedIcon />
+              </Icon>
+            </Link>
           </Info>
         </Container>
         <InfoBottom>

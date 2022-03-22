@@ -128,7 +128,7 @@ const CompleteShippingDetailsForm = () => {
     console.log("below will convert them to object");
 
     const response = await axios.put(
-      `http://localhost:9000/users/${user.currentUser._id}`,
+      `https://nikhil-ecomm.herokuapp.com/users/${user.currentUser._id}`,
       {
         shippingaddress: JSON.stringify(shippingaddress2),
         billingaddress: JSON.stringify(billingaddress2),

@@ -117,7 +117,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    if (cart.products.length && user.currentUser) {
+    if (
+      cart.products.length &&
+      user.currentUser &&
+      user.currentUser.billingaddress
+    ) {
       displayRazorpay();
     } else {
       !cart.products.length &&
@@ -137,6 +141,16 @@ const Cart = () => {
         toast.error("Cart is Empty!", {
           position: "top-center",
         });
+
+      cart.products.length &&
+        user.currentUser &&
+        !user.currentUser.billingaddress &&
+        toast.error("Shipping address required before checkout!", {
+          position: "top-center",
+        });
+      setTimeout(() => {
+        navigate("/userprofile");
+      }, 3000);
     }
   };
 
@@ -167,10 +181,11 @@ const Cart = () => {
       description: "Thank you!",
       image: "",
       handler: function (response) {
-        alert(response.razorpay_payment_id);
+        /* alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        alert(response.razorpay_signature); */
         navigate("/success", { state: { response, cart } });
+        dispatch(clearCart());
       },
       prefill: {
         name: user.currentUser.firstname,
@@ -180,8 +195,6 @@ const Cart = () => {
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-
-    dispatch(clearCart());
   }
 
   return (
