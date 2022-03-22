@@ -181,7 +181,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9000/products/find/${productId}`
+          `https://nikhil-ecomm.herokuapp.com/products/find/${productId}`
         );
         //console.log(response.data.product);
         setProduct(response.data.product);
