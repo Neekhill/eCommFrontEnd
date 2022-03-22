@@ -216,12 +216,12 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product, index) => (
+            {cart.products.map((product) => (
               <ProductCartCard
-                key={index}
+                key={product.cartItemId}
                 img={product.img[0]}
                 title={product.title}
-                id={product._id}
+                id={product.cartItemId}
                 color={product.color}
                 size={product.size}
                 quantity={product.quantity}

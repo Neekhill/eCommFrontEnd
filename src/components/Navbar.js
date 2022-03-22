@@ -48,7 +48,7 @@ const SearchContainer = styled.div`
   ${largeMobile({ display: "none" })}
 `;
 const MobileSearch = styled.span`
-  display: "none";
+  display: none;
   ${largeMobile({
     display: "block",
   })}

@@ -15,14 +15,14 @@ const cartSlice = createSlice({
     },
     incProductQuantity: (state, action) => {
       const index = state.products.findIndex(
-        (item) => item._id === action.payload.id
+        (item) => item.cartItemId === action.payload.id
       );
       state.products[index].quantity += 1;
       state.total += state.products[index].price;
     },
     decProductQuantity: (state, action) => {
       const index = state.products.findIndex(
-        (item) => item._id === action.payload.id
+        (item) => item.cartItemId === action.payload.id
       );
       const itemPrice = state.products[index].price;
 
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         state.total -= state.products[index].price;
       } else if (state.products[index].quantity === 1) {
         const filteredProducts = state.products.filter(
-          (item) => item._id !== action.payload.id
+          (item) => item.cartItemId !== action.payload.id
         );
         state.cartQuantity -= 1;
         state.total -= itemPrice;
@@ -40,13 +40,13 @@ const cartSlice = createSlice({
     },
     deleteProduct: (state, action) => {
       const index = state.products.findIndex(
-        (item) => item._id === action.payload.id
+        (item) => item.cartItemId === action.payload.id
       );
       const itemPrice = state.products[index].price;
       const itemQuantity = state.products[index].quantity;
 
       const filteredProducts = state.products.filter(
-        (item) => item._id !== action.payload.id
+        (item) => item.cartItemId !== action.payload.id
       );
       state.cartQuantity -= 1;
       state.total = state.total - itemPrice * itemQuantity;

@@ -204,7 +204,8 @@ const Product = () => {
 
   const handleClick = () => {
     if (!(color === "" || size === "")) {
-      dispatch(addProduct({ ...product, quantity, color, size }));
+      const cartItemId = new Date().getTime(); //generating id for cart item
+      dispatch(addProduct({ cartItemId, ...product, quantity, color, size }));
     } else {
       console.log("color:", color);
       console.log("size:", size);
