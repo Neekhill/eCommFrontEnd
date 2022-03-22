@@ -3,10 +3,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { mobile, tablet } from "../responsive";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../redux/userSlice";
-import { clearCart } from "../redux/cartSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -81,14 +79,7 @@ const MenuItem = styled.div`
 function Navbar() {
   const cartQuantity = useSelector((state) => state.cart.cartQuantity);
   const user = useSelector((state) => state.user.currentUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(clearCart());
-    navigate("/");
-  };
   return (
     <>
       <Container>

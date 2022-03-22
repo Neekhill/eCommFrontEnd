@@ -183,7 +183,7 @@ const Product = () => {
         const response = await axios.get(
           `http://localhost:9000/products/find/${productId}`
         );
-        console.log(response.data.product);
+        //console.log(response.data.product);
         setProduct(response.data.product);
         setProductImages(response.data.product.img);
       } catch (error) {

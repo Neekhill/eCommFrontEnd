@@ -12,7 +12,6 @@ import MyOrders from "../components/MyOrders";
 import { logout } from "../redux/userSlice";
 import { clearCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { Padding } from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
