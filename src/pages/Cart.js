@@ -147,10 +147,10 @@ const Cart = () => {
         !user.currentUser.billingaddress &&
         toast.error("Shipping address required before checkout!", {
           position: "top-center",
-        });
-      setTimeout(() => {
-        navigate("/userprofile");
-      }, 3000);
+        }) &&
+        setTimeout(() => {
+          navigate("/userprofile");
+        }, 5000);
     }
   };
 
