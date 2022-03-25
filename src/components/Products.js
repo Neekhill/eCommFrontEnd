@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ProductItem from "./ProductItem";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ProductSkeletonCard from "./ProductSkeletonCard";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const Products = ({ category, filters, sort }) => {
   //console.log(category, filters, sort);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // fetching products based on category or all products
     const getProducts = async () => {
@@ -26,6 +27,7 @@ const Products = ({ category, filters, sort }) => {
             : `https://nikhil-ecomm.herokuapp.com/products`
         );
         //console.log(resonse);
+        setIsLoading(false);
         setProducts(resonse.data.products);
       } catch (error) {
         console.log(error);
@@ -65,13 +67,26 @@ const Products = ({ category, filters, sort }) => {
   }, [sort]);
   return (
     <Container>
-      {category // if category is there then showing filtered products
-        ? filteredProducts.map((item) => (
-            <ProductItem item={item} key={item.id} />
-          ))
-        : products
-            .slice(0, 8) // else showing only 8 products
-            .map((item) => <ProductItem item={item} key={item.id} />)}
+      {isLoading ? (
+        <>
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+          <ProductSkeletonCard />
+        </>
+      ) : category ? ( // if category is there then showing filtered products
+        filteredProducts.map((item) => (
+          <ProductItem item={item} key={item.id} />
+        ))
+      ) : (
+        products
+          .slice(0, 8) // else showing only 8 products
+          .map((item) => <ProductItem item={item} key={item.id} />)
+      )}
     </Container>
   );
 };

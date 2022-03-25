@@ -2,13 +2,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import loginFormImg from "../assets/loginFormImg.jpg";
 import { login } from "../redux/apiCalls";
-import { mobile, tablet } from "../responsive";
+import { largeMobile, mobile, tabletPlus } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -23,8 +24,10 @@ const Wrapper = styled.div`
   background: white;
   width: 25%;
   padding: 20px;
-  ${mobile({ width: "70%" })}
-  ${tablet({ width: "50%" })}
+
+  ${tabletPlus({ width: "50%" })}
+  ${largeMobile({ width: "60%" })}
+  ${mobile({ width: "80%" })}
 `;
 const Title = styled.h1`
   font-size: 24px;
@@ -58,12 +61,7 @@ const Error = styled.span`
   color: red;
   font-size: 16px;
 `;
-const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -92,8 +90,30 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {error && <Error>Invalid email/password</Error>}
-            <Link>DON'T REMEMBER THE PASSWORD?</Link>
-            <Link>CREATE A NEW ACCOUNT</Link>
+            <Link
+              to=""
+              style={{
+                margin: "5px 0px",
+                fontSize: "12px",
+                textDecoration: "underline",
+                cursor: "pointer",
+                color: "black",
+              }}
+            >
+              DON'T REMEMBER THE PASSWORD?
+            </Link>
+            <Link
+              to="/register"
+              style={{
+                margin: "5px 0px",
+                fontSize: "12px",
+                textDecoration: "underline",
+                cursor: "pointer",
+                color: "black",
+              }}
+            >
+              CREATE A NEW ACCOUNT
+            </Link>
             <Button onClick={handleClick} disabled={isFecthing}>
               Login
             </Button>

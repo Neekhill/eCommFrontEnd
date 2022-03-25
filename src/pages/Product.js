@@ -7,13 +7,14 @@ import NewsLetter from "../components/NewsLetter";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { Add, Remove } from "@mui/icons-material";
 
-import { large, mobile, tablet } from "../responsive";
+import { large, largeMobile, mobile, tablet } from "../responsive";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { addProduct } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SkeletonSingleProduct from "../components/SkeletonSingleProduct";
 
 const Container = styled.div``;
 
@@ -35,7 +36,7 @@ const Image = styled.img`
   width: 100%;
   height: 95vh;
   object-fit: cover;
-  ${mobile({ height: "50vh" })}
+  ${largeMobile({ height: "50vh" })}
 `;
 
 const ImageThumbContainer = styled.div`
@@ -178,6 +179,8 @@ const Product = () => {
 
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -185,6 +188,7 @@ const Product = () => {
           `https://nikhil-ecomm.herokuapp.com/products/find/${productId}`
         );
         //console.log(response.data.product);
+        setIsLoading(false);
         setProduct(response.data.product);
         setProductImages(response.data.product.img);
       } catch (error) {
@@ -206,6 +210,7 @@ const Product = () => {
     if (!(color === "" || size === "")) {
       const cartItemId = new Date().getTime(); //generating id for cart item
       dispatch(addProduct({ cartItemId, ...product, quantity, color, size }));
+      toast.success("Added to cart successfully!", { position: "top-center" });
     } else {
       console.log("color:", color);
       console.log("size:", size);
@@ -224,69 +229,72 @@ const Product = () => {
     <Container>
       <Announcement />
       <Navbar />
-      <Wrapper>
-        <ToastContainer />
-        <ImageContainer>
-          <Image src={productImages[slideIndex]}></Image>
-          <ImageThumbContainer>
-            {productImages.map((imgItem, index) => (
-              <ImageThumb
-                src={imgItem}
-                key={index}
-                onClick={() => handleSlideIndex(index)}
-              />
-            ))}
-          </ImageThumbContainer>
-        </ImageContainer>
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Price>Rs.{product.price}</Price>
-          <Desc>{product.desc}</Desc>
-          <Delivery>
-            <DeliveryIcon>
-              <LocalShippingOutlinedIcon />
-            </DeliveryIcon>
-            <DeliveryMsg>
-              products are usually delivered in 3-7 days.
-            </DeliveryMsg>
-          </Delivery>
-
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              {product.colors?.map((c) => (
-                <FilterColor
-                  color={c}
-                  key={c}
-                  onClick={(e) => setColor(c)}
-                ></FilterColor>
+      {isLoading ? (
+        <SkeletonSingleProduct />
+      ) : (
+        <Wrapper>
+          <ToastContainer />
+          <ImageContainer>
+            <Image src={productImages[slideIndex]}></Image>
+            <ImageThumbContainer>
+              {productImages.map((imgItem, index) => (
+                <ImageThumb
+                  src={imgItem}
+                  key={index}
+                  onClick={() => handleSlideIndex(index)}
+                />
               ))}
-            </Filter>
+            </ImageThumbContainer>
+          </ImageContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Price>Rs.{product.price}</Price>
+            <Desc>{product.desc}</Desc>
+            <Delivery>
+              <DeliveryIcon>
+                <LocalShippingOutlinedIcon />
+              </DeliveryIcon>
+              <DeliveryMsg>
+                products are usually delivered in 3-7 days.
+              </DeliveryMsg>
+            </Delivery>
 
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                <FilterSizeOption>Select Size</FilterSizeOption>
-                {product.sizes?.map((s, i) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Color</FilterTitle>
+                {product.colors?.map((c) => (
+                  <FilterColor
+                    color={c}
+                    key={c}
+                    onClick={(e) => setColor(c)}
+                  ></FilterColor>
                 ))}
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove
-                cursor="pointer"
-                onClick={() => handleQuantity("remove")}
-              />
-              <Amount>{quantity}</Amount>
-              <Add cursor="pointer" onClick={() => handleQuantity("add")} />
-            </AmountContainer>
-            <Button onClick={handleClick}>ADD TO CART</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
+              </Filter>
 
+              <Filter>
+                <FilterTitle>Size</FilterTitle>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  <FilterSizeOption>Select Size</FilterSizeOption>
+                  {product.sizes?.map((s, i) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))}
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove
+                  cursor="pointer"
+                  onClick={() => handleQuantity("remove")}
+                />
+                <Amount>{quantity}</Amount>
+                <Add cursor="pointer" onClick={() => handleQuantity("add")} />
+              </AmountContainer>
+              <Button onClick={handleClick}>ADD TO CART</Button>
+            </AddContainer>
+          </InfoContainer>
+        </Wrapper>
+      )}
       <NewsLetter />
       <Footer />
     </Container>
