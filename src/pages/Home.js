@@ -6,12 +6,10 @@ import HeroSlider from "../components/HeroSlider";
 import Navbar from "../components/Navbar";
 import NewsLetter from "../components/NewsLetter";
 import Products from "../components/Products";
-import SkeletonSingleProduct from "../components/SkeletonSingleProduct";
 
 function Home() {
   return (
     <div>
-      <SkeletonSingleProduct />
       <Announcement />
       <Navbar />
       <HeroSlider />
