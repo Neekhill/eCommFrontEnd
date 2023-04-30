@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkeletonSingleProduct from "../components/SkeletonSingleProduct";
+import { APP_END_POINT } from "../constant";
 
 const Container = styled.div``;
 
@@ -185,7 +186,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const response = await axios.get(
-          `https://nikhil-ecomm.herokuapp.com/products/find/${productId}`
+          `${APP_END_POINT}/products/find/${productId}`
         );
         //console.log(response.data.product);
         setIsLoading(false);

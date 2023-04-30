@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../redux/userSlice";
+import { APP_END_POINT } from "../constant";
 
 const Wrapper = styled.div`
   background: white;
@@ -97,7 +98,7 @@ const CompleteRegistrationForm = () => {
   const submitForm = async (data) => {
     const { firstname, lastname, username, email, phone, birthday } = data;
     const response = await axios.put(
-      `https://nikhil-ecomm.herokuapp.com/users/${user.currentUser._id}`,
+      `${APP_END_POINT}/users/${user.currentUser._id}`,
       {
         firstname,
         lastname,

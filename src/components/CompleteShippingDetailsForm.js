@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserAddress } from "../redux/userSlice";
+import { APP_END_POINT } from "../constant";
 
 const Wrapper = styled.div`
   background: white;
@@ -128,7 +129,7 @@ const CompleteShippingDetailsForm = () => {
     console.log("below will convert them to object");
 
     const response = await axios.put(
-      `https://nikhil-ecomm.herokuapp.com/users/${user.currentUser._id}`,
+      `${APP_END_POINT}/users/${user.currentUser._id}`,
       {
         shippingaddress: JSON.stringify(shippingaddress2),
         billingaddress: JSON.stringify(billingaddress2),

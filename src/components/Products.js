@@ -3,6 +3,7 @@ import ProductItem from "./ProductItem";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductSkeletonCard from "./ProductSkeletonCard";
+import { APP_END_POINT } from "../constant";
 
 const Container = styled.div`
   display: flex;
@@ -23,8 +24,8 @@ const Products = ({ category, filters, sort }) => {
       try {
         const resonse = await axios.get(
           category
-            ? `https://nikhil-ecomm.herokuapp.com/products?category=${category}`
-            : `https://nikhil-ecomm.herokuapp.com/products`
+            ? `${APP_END_POINT}/products?category=${category}`
+            : `${APP_END_POINT}/products`
         );
         //console.log(resonse);
         setIsLoading(false);

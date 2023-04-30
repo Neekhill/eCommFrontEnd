@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { APP_END_POINT } from "../constant";
 
 const Container = styled.div`
   width: 100vw;
@@ -98,16 +99,13 @@ const Register = () => {
   const submitForm = async (data) => {
     const { firstname, lastname, username, email, password } = data;
     try {
-      const response = await axios.post(
-        `https://nikhil-ecomm.herokuapp.com/auth/register`,
-        {
-          firstname,
-          lastname,
-          username,
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${APP_END_POINT}/auth/register`, {
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+      });
       console.log(response);
       if (response.status === 201) {
         notify();

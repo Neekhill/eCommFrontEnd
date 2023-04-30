@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
+import { APP_END_POINT } from "../constant";
 
 const Conatiner = styled.div``;
 
@@ -164,7 +165,7 @@ const Cart = () => {
       return;
     }
     const resFromBackend = await axios.post(
-      `https://nikhil-ecomm.herokuapp.com/checkout/razorpay`,
+      `${APP_END_POINT}/checkout/razorpay`,
       {
         amount: cart.total,
       },

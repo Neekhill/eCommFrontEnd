@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { APP_END_POINT } from "../constant";
 
 const Success = () => {
   const location = useLocation();
@@ -22,7 +23,7 @@ const Success = () => {
     const createOrder = async () => {
       try {
         const res = await axios.post(
-          "https://nikhil-ecomm.herokuapp.com/orders",
+          `${APP_END_POINT}/orders`,
           {
             _id: data.razorpay_order_id,
             userId: user.currentUser._id,

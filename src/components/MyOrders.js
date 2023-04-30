@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import OrderContainer from "./OrderContainer";
+import { APP_END_POINT } from "../constant";
 
 const MainContaienr = styled.div`
   margin: 0 20px;
@@ -33,7 +34,7 @@ const MyOrders = () => {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          `https://nikhil-ecomm.herokuapp.com/orders/find/${user.currentUser._id}`,
+          `${APP_END_POINT}/orders/find/${user.currentUser._id}`,
           { headers: { token: `Bearer ${user.currentUser.token}` } }
         );
         console.log(res.data.orders);
